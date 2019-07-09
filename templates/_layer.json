@@ -1,0 +1,55 @@
+{% set jsonData = fetchJson({
+    'url': entry.polygons.one.url
+}) %}
+
+{% if (jsonData) %}
+{
+    "type": "FeatureCollection",
+    "features": [
+
+
+
+{% for item in jsonData %}
+{
+    "type": "Feature",
+    "properties": {
+        "lsoa_label_01": "{{ item.lsoa_label_01 }}",
+        "name": "Barnack",
+        "colour": "{% switch item.imd_decile_15 %}{% case 1 %}#8b0000{% case 2 %}#b22222{% case 3 %}#ff0000{% case 4 %}#dc143c{% case 5 %}#ffa07a{% case 6 %}#e9967a{% default %}#adff2f{% endswitch %}"
+    },
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+            {{ item.geometry
+                
+                | replace({'<MultiGeometry>': ''})
+                | replace({'</MultiGeometry>': ''})                
+                
+                | replace({'</Polygon><Polygon>': '],['})
+                | replace({'<Polygon>': '['})
+                | replace({'</Polygon>': ']'})
+
+                | replace({'<outerBoundaryIs><LinearRing><coordinates>': '['})
+                | replace({'</coordinates></LinearRing></outerBoundaryIs>': ''})
+                
+                | replace({',0.0 ': '],['})
+                | replace({',0.0': ']'})
+
+                
+                | replace({'<innerBoundaryIs><LinearRing><coordinates>': '],[['})
+                | replace({'</coordinates></LinearRing></innerBoundaryIs>': ''})
+                    
+                | raw
+
+            }}
+        ]
+    }
+}{{ not loop.last ? ',' }}
+{% endfor %}
+
+
+
+
+  ]
+}
+{% endif %}

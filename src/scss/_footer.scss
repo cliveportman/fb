@@ -1,0 +1,100 @@
+/*
+#####################################
+FOOTER
+#####################################
+*/
+#footer {
+	border-top: 1px solid black;
+    padding: 2rem 2rem 2rem;
+    display: flex;
+    justify-content: left;
+}
+#footer-logo {
+
+    width: 13rem;
+
+    @media (min-width: $sm) {
+        width: 20rem;
+    }
+    @media (min-width: $md) {
+    }
+
+    img {
+        display: block;
+    }
+
+}
+
+#footer-synopsis {
+
+    display: none;
+
+    @media (min-width: $sm) {
+        display: block; width: 32rem;
+        padding-top: 2.25rem; padding-left: 2rem;
+        font-size: 1.6rem;
+    }
+
+    @media (min-width: $md) {
+        display: block; width: 42rem;
+    }
+
+    @media (min-width: $lg) {
+        display: block; width: 50rem;
+    }
+
+}
+
+#footer-nav {
+
+    display: none;
+
+    @media (min-width: $sm) {
+        display: block; width: 20rem;
+        font-size: 1.6rem;
+        margin-left: auto;
+    }
+
+    @media (min-width: $md) {
+        display: block; width: 30rem;
+    }
+
+    p {
+        margin-bottom: 2rem;
+        text-align: right; font-size: 1.6rem;
+        
+        @media (min-width: $sm) {
+            font-weight: bold;
+        }
+        
+        @media (min-width: $md) {
+            font-size: 1.8rem;
+        }
+        a {
+            text-decoration: none;
+        
+            @media (min-width: $md) {
+                font-size: 1.8rem;
+            }
+
+        }
+    }
+
+    a {
+        display: block;
+        font-size: 1.6rem;
+        text-align: right;
+
+        &:focus, &:hover, &:active {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+#footer-copyright {
+	padding: 0 2rem;
+	width: 100%;
+	flex-shrink: 0;
+	text-align: right;
+}

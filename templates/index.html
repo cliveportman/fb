@@ -1,0 +1,162 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+
+
+<div id="main">
+    <h1 id="main-heading">Cultural Education Profiles</h1>
+
+<section id="sidebar">
+    {% set polygonLayers = craft.entries.section('layers').type('polygons').all %}
+    {% for layer in polygonLayers %}
+      <button id="polygonlayer-{{ loop.index }}">{{ layer.title }}</button>
+    {% endfor %} 
+    {% set pointLayers = craft.entries.section('layers').type('points').all %}
+    {% for layer in pointLayers %}
+      <button id="pointlayer-{{ loop.index }}">{{ layer.title }}</button>
+    {% endfor %}
+  </section>
+  
+  <section id="map-holder">
+    <div id="map"></div>
+  </section>
+
+</div>
+<div id="status"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs0T27FTl42h2oPJu1sDy3Eq7JHkuU_l0"></script>
+
+<script>
+
+
+
+
+function initialize() {
+
+  // CREATE THE MAP
+  var myLatlng = new google.maps.LatLng(52.6330491,1.2909484);
+  var mapOptions = {
+    zoom: 12,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  // layers to toggle 
+  var pointLayers = [];
+
+  {% for layer in pointLayers %}
+  pointLayers[{{ loop.index0 }}] = new google.maps.KmlLayer('{{ layer.points.one.url }}', {
+      preserveViewport: true
+    });
+  {% endfor %}
+
+  // CREATE A POINTS LAYER
+  loadKml = function(opts, map) {
+    var layer = new google.maps.KmlLayer();
+    opts.preserveViewport = true;
+    if (map) {
+      opts.map = map;
+    }
+    google.maps.event.addListener(layer, 'defaultviewport_changed', function() {
+      var map = this.getMap(),
+        bounds = map.get('kmlBounds') || this.getDefaultViewport();
+      bounds.union(this.getDefaultViewport());
+      map.set('kmlBounds', bounds);
+      map.fitBounds(bounds);
+    });
+    layer.setOptions(opts);
+    return layer;
+  };
+
+  // TOGGLE THE POINTS LAYERS
+  function toggleLayers(i) {
+    if (pointLayers[i].getMap() == null) {
+      pointLayers[i].setMap(map);
+    } else {
+      pointLayers[i].setMap(null);
+    }
+    google.maps.event.addListener(pointLayers[i], 'status_changed', function() {
+      console.log("toggleLayers(" + i + ") [setMap(" + pointLayers[i].getMap() + "] returns status: " + pointLayers[i].getStatus());
+    });
+  }
+
+  // TOGGLE BUTTON CLASSES
+  function toggleButton($button) {
+    $button.classList.toggle("active");
+  }
+    
+  {% for layer in pointLayers %}
+
+    // add the event listener to the button
+    google.maps.event.addDomListener(document.getElementById('pointlayer-{{ loop.index }}'), 'click', function(evt) {
+      toggleLayers({{ loop.index0 }});
+      toggleButton(this);
+    });
+
+    // toggle the layer on at the beginning
+    //toggleLayers({{ loop.index0 }});
+
+  {% endfor %}
+
+  var polygonLayers = [];
+
+  {% for layer in polygonLayers %}
+
+    polygonLayers[{{ loop.index0 }}] = new google.maps.Data();
+    polygonLayers[{{ loop.index0 }}].loadGeoJson('{{ layer.url }}');
+    polygonLayers[{{ loop.index0 }}].setStyle(function(feature) {
+      var colour = feature.getProperty('colour');
+      return {
+        fillColor: colour,
+        fillOpacity: 0.5,
+        strokeWeight: 1,
+        strokeColor: '#cccccc'
+      };
+    });
+    polygonLayers[{{ loop.index0 }}].addListener('mouseover', function(event) {
+      polygonLayers[{{ loop.index0 }}].revertStyle();
+      polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {fillOpacity: .25,});
+      //document.getElementById("hoverinfo").innerHTML = event.feature.getProperty('name') + '<br>' + event.feature.getProperty('lsoa');
+    });
+    polygonLayers[{{ loop.index0 }}].addListener('click', function(event) {
+      polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {
+        fillOpacity: 0.75
+      });
+      // open up a modal with all the info in it
+      console.log(event.feature.getProperty('lsoa_label_01'));
+    });
+    polygonLayers[{{ loop.index0 }}].addListener('mouseout', function(event) {
+      // polygonLayers[0].overrideStyle(event.feature, {
+      //   fillColor: event.feature.getProperty('colour'),
+      //   fillOpacity: 0.5,
+      // });
+      polygonLayers[{{ loop.index0 }}].revertStyle();
+      //document.getElementById("hoverinfo").innerHTML = '';
+    });
+  
+  {% endfor %}
+    
+  function togglePolygonLayers(i) {
+    if (polygonLayers[i].getMap() == null) {
+      polygonLayers[i].setMap(map);
+    } else {
+      polygonLayers[i].setMap(null);
+    }
+  }
+
+  {% for layer in polygonLayers %}
+    // add the event listener to the button
+    google.maps.event.addDomListener(document.getElementById('polygonlayer-{{ loop.index }}'), 'click', function(evt) {
+      togglePolygonLayers({{ loop.index0 }});
+      toggleButton(this);
+    });
+  {% endfor %}
+
+} // end the initialize function
+
+google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
+{% endblock %}

@@ -1,0 +1,278 @@
+/*
+#####################################
+HEADER
+#####################################
+*/
+#header {
+    padding: 2rem 2rem 2rem;
+    display: flex;
+    justify-content: left;
+}
+
+/*
+#####################################
+SITE LOGO
+#####################################
+*/
+#header-logo {
+
+    width: 13rem;
+
+    @media (min-width: $sm) {
+        width: 20rem;
+    }
+    @media (min-width: $md) {
+    }
+
+    img {
+        display: block;
+    }
+
+}
+
+#header-synopsis {
+
+    display: none;
+
+    @media (min-width: $sm) {
+        display: block; width: 32rem;
+        padding-top: 2.25rem; padding-left: 2rem;
+        font-size: 1.6rem;
+    }
+
+    @media (min-width: $md) {
+        display: block; width: 42rem;
+    }
+
+    @media (min-width: $lg) {
+        display: block; width: 50rem;
+    }
+
+}
+
+#header-nav {
+
+    display: none;
+
+    @media (min-width: $sm) {
+        display: block; width: 20rem;
+        font-size: 1.6rem;
+        margin-left: auto;
+    }
+
+    @media (min-width: $md) {
+        display: block; width: 30rem;
+    }
+
+    p {
+        margin-bottom: 2rem;
+        text-align: right; font-size: 1.6rem;
+        
+        @media (min-width: $sm) {
+            font-weight: bold;
+        }
+        
+        @media (min-width: $md) {
+            font-size: 1.8rem;
+        }
+        a {
+            text-decoration: none;
+        
+            @media (min-width: $md) {
+                font-size: 1.8rem;
+            }
+
+        }
+    }
+
+    a {
+        display: block;
+        font-size: 1.6rem;
+        text-align: right;
+
+        &:focus, &:hover, &:active {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+/*
+#####################################
+MENU BUTTON
+#####################################
+*/
+a#menubutton {
+    float: right;
+    display: block; width: 40px; max-width: 40px;
+    font-size: 2.4em; text-decoration: none;
+    padding: 0; margin: 0 0 5.7rem;
+    border: none;
+    background: none;
+    transition: none;
+    font-size: 1.3rem; color: $textColor; text-align: center; text-transform: uppercase;
+
+}
+    #menubutton rect {
+        fill: $textColor !important;
+    }
+
+a#menubutton:focus, a#menubutton:hover, a#menubutton:active {
+    color: $highlightColor;
+}
+    #hamburgericon {
+        height: 29px; width: 48px;
+    }
+        #menubutton:focus rect, #menubutton:hover rect, #menubutton:active rect {
+            fill: $highlightColor !important;
+        }
+        a#menubutton span {
+            display: block;
+            margin-top: 0;
+        }
+@media (min-width: $sm) {
+}
+@media (min-width: $md) {
+}
+@media (min-width: $lg) {
+}
+
+
+
+
+/*
+#####################################
+COLLAPSING NAV
+#####################################
+*/
+@media (max-width: 767px) {
+.nav-collapse, .nav-collapse.collapse { height: 0; overflow: hidden;}
+.nav-collapse.in { height: auto;}
+.nav-collapse.dropdown, .nav-collapse.dropdown.collapse { height: 0; overflow: hidden;}
+.nav-collapse.dropdown.in { height: auto;}
+}
+
+
+#sitewide-subnav {}
+    #sitewide-subnav a {
+        display: block; width: 100%; height: auto;
+        padding: 1.5rem 0.5rem;
+        font-size: 2rem; font-weight: 300; text-align: center; color: $textColor;
+        text-decoration: none; line-height: 2rem;
+        border-bottom: 1px solid #000;
+        &:focus, &:hover, &:active, &.active {
+            color: $highlightColor2;
+        }
+        &:first-of-type {
+            padding-top: 0.5rem;
+        }
+        &:last-of-type {
+            padding-bottom: 2rem;
+            border-bottom: none;
+        }
+    }
+@media (min-width: $sm) {
+#sitewide-subnav {
+    padding-top: 1rem;
+}
+    #sitewide-subnav a {
+        padding: 0;
+        color: #000; text-align: right; font-size: 1.6rem; line-height: 1.4em;
+        border: none;
+        &:first-of-type {
+            padding-top: 0;
+        }
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+}
+@media (min-width: $md) {
+#sitewide-subnav {
+    padding-top: 1rem;
+    text-align: right;
+}
+    #sitewide-subnav a {
+        display: inline;
+        padding: 0;
+        color: #000; text-align: right; font-size: 1.6rem; line-height: 1.4em;
+        border: none;
+        &:first-of-type {
+            padding-top: 0;
+
+        }
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+        &:after {
+            content: " | ";
+        }
+        &:last-of-type:after {
+            content: "";
+        }
+    }
+}
+
+
+#sitewide-heading {
+    padding: 1rem 2rem; 
+    font-weight: bold; color: $bgColor; text-transform: uppercase;
+    font-size: 2rem; line-height: 2.4rem; text-align: center;
+    background: $textColor;
+}
+@media (min-width: $sm) {
+#sitewide-heading {
+    padding: 1.5rem 2rem; 
+}
+}
+@media (min-width: $md) {
+#sitewide-heading {
+    font-size: 2.6rem; 
+}
+}
+@media (min-width: $lg) {
+#sitewide-heading {
+    font-size: 3.2rem; 
+}
+}
+
+#sitewide-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+    #sitewide-nav a {
+        display: block;
+        padding: 1.5rem 2rem; 
+        font-weight: bold; color: $textColor; text-transform: uppercase; text-decoration: none;
+        font-size: 2rem; line-height: 1.2em; text-align: center;
+        border: 1px solid #000;
+        border-bottom: none;
+        align-items: center;
+        &.active {
+            background: $highlightColor;
+        }   
+        &.active:focus, &.active:hover, &.active:active,  {
+            background: $bgColor;            
+        }
+        &:last-of-type {
+            border-bottom: 1px solid #000;
+        }
+    }
+
+@media (min-width: $sm) {
+
+    #sitewide-nav a {
+        float: left;
+        display: block; width: 25%;
+        padding: 1.7rem 2rem 1.5rem; margin-bottom: 4rem;
+        font-weight: bold; color: $textColor; text-transform: uppercase; text-decoration: none;
+        font-size: 2rem; line-height: 1.2em; text-align: center;
+        border: 1px solid #000;
+        border-right: none;
+        &:last-of-type {
+            border-right: 1px solid #000;
+        }
+    }
+}
+

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>KML Click Capture Sample</title>
+    <style>
+      html, body {
+       height: 100%;
+       width: 100%;
+       position: relative;
+        padding: 0;
+        margin: 0;
+        }
+      #map {
+       height: 100%;
+       width: calc(100% - 300px);
+       overflow: hidden;
+       float: left;
+      }
+      #sidebar {
+       height: 100%;
+       width: 300px;
+       overflow: hidden;
+       float: left;
+       }
+    </style>
+  </head>
+  <body>
+    <div id="sidebar">
+      <p id="hoverinfo"></p>
+      <button type="" id="hidelayer">Hide layer</button>
+    </div>
+    <div id="map"></div>
+    <script>
+      var map;
+
+function initMap() {
+
+
+
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: {lat: 52.604628, lng: -0.29155}
+  });
+
+  var polygonLayers = [];
+
+  polygonLayers[0] = new google.maps.Data();
+
+  polygonLayers[0].loadGeoJson('{{ siteUrl }}layers/wards.json');
+
+  polygonLayers[0].setStyle(function(feature) {
+    var colour = feature.getProperty('colour');
+    return {
+      fillColor: colour,
+      fillOpacity: 0.5,
+      strokeWeight: 1,
+      strokeColor: '#cccccc'
+    };
+  });
+
+  polygonLayers[0].setMap(map);
+
+  polygonLayers[0].addListener('mouseover', function(event) {
+    polygonLayers[0].revertStyle();
+    polygonLayers[0].overrideStyle(event.feature, {fillOpacity: 0,});
+    document.getElementById("hoverinfo").innerHTML = event.feature.getProperty('name') + '<br>' + event.feature.getProperty('lsoa');
+  });
+
+  polygonLayers[0].addListener('click', function(event) {
+    polygonLayers[0].overrideStyle(event.feature, {
+      fillOpacity: 1
+    });
+    // open up a modal with all the info in it
+    console.log(event.feature.getProperty('url'));
+  });
+
+  polygonLayers[0].addListener('mouseout', function(event) {
+    // polygonLayers[0].overrideStyle(event.feature, {
+    //   fillColor: event.feature.getProperty('colour'),
+    //   fillOpacity: 0.5,
+    // });
+    polygonLayers[0].revertStyle();
+    document.getElementById("hoverinfo").innerHTML = '';
+  });
+
+    
+  function togglePolygonLayers(i) {
+    if (polygonLayers[i].getMap() == null) {
+      polygonLayers[i].setMap(map);
+    } else {
+      polygonLayers[i].setMap(null);
+    }
+  }
+
+  // add the event listener to the button
+  google.maps.event.addDomListener(document.getElementById('hidelayer'), 'click', function(evt) {
+    togglePolygonLayers(0);
+  });
+
+}
+
+
+
+
+
+
+
+
+      // var map;
+
+// function initMap() {
+
+
+
+
+//   map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 12,
+//     center: {lat: 52.604628, lng: -0.29155}
+//   });
+
+//   var wardsData = new google.maps.Data();
+
+//   wardsData.loadGeoJson('{{ siteUrl }}layers/wards.json');
+
+//   wardsData.setStyle(function(feature) {
+//     var colour = feature.getProperty('colour');
+//     return {
+//       fillColor: colour,
+//       fillOpacity: 0.5,
+//       strokeWeight: 1,
+//       strokeColor: '#cccccc'
+//     };
+//   });
+
+//   wardsData.setMap(map);
+
+//   wardsData.addListener('mouseover', function(event) {
+//     wardsData.revertStyle();
+//     wardsData.overrideStyle(event.feature, {fillOpacity: 0,});
+//     document.getElementById("hoverinfo").innerHTML = event.feature.getProperty('name') + '<br>' + event.feature.getProperty('lsoa');
+//   });
+
+//   wardsData.addListener('click', function(event) {
+//     wardsData.overrideStyle(event.feature, {
+//       fillOpacity: 1
+//     });
+//     // open up a modal with all the info in it
+//     console.log(event.feature.getProperty('url'));
+//   });
+
+//   wardsData.addListener('mouseout', function(event) {
+//     // wardsData.overrideStyle(event.feature, {
+//     //   fillColor: event.feature.getProperty('colour'),
+//     //   fillOpacity: 0.5,
+//     // });
+//     wardsData.revertStyle();
+//     document.getElementById("hoverinfo").innerHTML = '';
+//   });
+
+
+
+
+
+
+//   // map.data.loadGeoJson('https://fb.theportman.co/layers/data.json');
+
+//   // map.data.setStyle(function(feature) {
+//   //     var colour = feature.getProperty('colour');
+//   //     return {
+//   //       fillColor: colour,
+//   //       fillOpacity: 0.5,
+//   //       strokeWeight: 1,
+//   //       strokeColor: '#cccccc'
+//   //     };
+//   // });
+
+//   // map.data.addListener('mouseover', function(event) {
+//   //   map.data.revertStyle();
+//   //   map.data.overrideStyle(event.feature, {fillColor: '#ffffff',});
+//   //   document.getElementById("hoverinfo").innerHTML = event.feature.getProperty('name') + '<br>' + event.feature.getProperty('lsoa');
+//   // });
+
+//   // map.data.addListener('click', function(event) {
+//   //   map.data.overrideStyle(event.feature, {
+//   //     fillColor: '#ffffff',
+//   //     fillOpacity: 1
+//   //   });
+//   //   // open up a modal with all the info in it
+//   //   console.log(event.feature.getProperty('url'));
+//   // });
+
+//   // map.data.addListener('mouseout', function(event) {
+//   //   // map.data.overrideStyle(event.feature, {
+//   //   //   fillColor: event.feature.getProperty('colour'),
+//   //   //   fillOpacity: 0.5,
+//   //   // });
+//   //   map.data.revertStyle();
+//   //   document.getElementById("hoverinfo").innerHTML = '';
+//   // });
+
+
+
+
+
+
+
+
+
+
+// }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs0T27FTl42h2oPJu1sDy3Eq7JHkuU_l0&callback=initMap">
+    </script>
+
+  </body>
+</html>

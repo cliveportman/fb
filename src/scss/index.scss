@@ -1,0 +1,32 @@
+// BREAKPOINTS
+$sm : 768px;
+$md : 1024px;
+$lg : 1367px;
+
+// SPACINGS
+$vMargin :  4rem;
+
+// COLOURS
+$textColor: #000000; // black
+$highlightColor: #FFF100; // yellow
+$highlightColor2: #FF4AB0; // pink
+$bgColor: #ffffff; // white
+
+
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}  
+}
+
+// IMPORTS
+@import '_resets'; // contains all the resets
+@import '_header'; // navigation and site logo
+@import '_main'; // default text stylings
+@import '_footer'; // small print, footer links, RICS logo
+@import 'sections/_map';
+@import 'sections/_headlines';
+@import 'sections/_resources';
+@import 'sections/_search';

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,width=device-width">
+</head>
+
+<body>
+
+
+<style>
+
+body,
+html,
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+button.active {
+  opacity: 0.25;
+}
+
+</style>
+<div id="status"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs0T27FTl42h2oPJu1sDy3Eq7JHkuU_l0"></script>
+
+<div id="map"></div>
+
+{% set layers = craft.entries.section('layers').all %}
+{% for layer in layers %}
+  Layer{{ loop.index }}
+  <button type="" id="layer-{{ loop.index }}">{{ layer.title }}</button>
+{% endfor %}
+
+<script>
+// layers to toggle 
+var layers = [];
+
+{% for layer in layers %}
+  layers[{{ loop.index0 }}] = new google.maps.KmlLayer('{{ layer.points.one.url }}', {
+    preserveViewport: true
+  });
+{% endfor %}
+
+
+
+// end layers to toggle 
+// intialize 
+
+function initialize() {
+  var myLatlng = new google.maps.LatLng(52.6330491,1.2909484);
+  var mapOptions = {
+    zoom: 12,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  loadKml = function(opts, map) {
+    var layer = new google.maps.KmlLayer();
+    opts.preserveViewport = true;
+    if (map) {
+      opts.map = map;
+    }
+
+    google.maps.event.addListener(layer, 'defaultviewport_changed', function() {
+      var map = this.getMap(),
+        bounds = map.get('kmlBounds') || this.getDefaultViewport();
+
+      bounds.union(this.getDefaultViewport());
+      map.set('kmlBounds', bounds);
+      map.fitBounds(bounds);
+    });
+    layer.setOptions(opts);
+    return layer;
+  };
+
+  function toggleLayers(i) {
+    if (layers[i].getMap() == null) {
+      layers[i].setMap(map);
+    } else {
+      layers[i].setMap(null);
+    }
+    google.maps.event.addListener(layers[i], 'status_changed', function() {
+      document.getElementById('status').innerHTML += "toggleLayers(" + i + ") [setMap(" + layers[i].getMap() + "] returns status: " + layers[i].getStatus() + "<br>";
+    });
+  }
+
+  function toggleButton($button) {
+    $button.classList.toggle("active");
+  }
+    
+  {% for layer in layers %}
+
+    // add the event listener to the button
+    google.maps.event.addDomListener(document.getElementById('layer-{{ loop.index }}'), 'click', function(evt) {
+      toggleLayers({{ loop.index0 }});
+      toggleButton(this);
+    });
+
+    // toggle the layer on at the beginning
+    toggleLayers({{ loop.index0 }});
+
+  {% endfor %}
+
+} // end the initialize function
+
+google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
+</body>
+</html>

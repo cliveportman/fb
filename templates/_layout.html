@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="home" href="{{ siteUrl }}" />
+	<link rel="stylesheet" href="{{ siteUrl }}fb.min.css?v={{ now | date('U') }}" />
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+</head>
+
+<body>
+
+{% spaceless %}
+    {% set pages = craft.entries.section('otherPages').all %}
+{% endspaceless %}
+
+<header id="header">
+
+    <h1 id="header-logo">
+        <a href="{{ siteUrl }}">
+            <img src="{{ siteUrl('img/logo.gif') }}" alt="Festival Bridge">
+        </a>
+    </h1>
+
+    <p id="header-synopsis">{{ sitewide.synopsis }}</p>
+        
+    <nav id="header-nav">
+        <p>
+            <a href="tel:01603 877750" class="header-contactlink">01603 877750</a>
+            <a href="mailto:bridge@nnfestival.org.uk" class="header-contactlink">bridge@nnfestival.org.uk</a>
+        </p>
+        {% if pages | length %}
+        {% for page in pages %}
+            <a href="{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+        {% endif %}
+    </nav>
+        
+</header>
+
+{% block content %}{% endblock %}
+
+<footer id="footer">
+
+    <h1 id="footer-logo">
+        <a href="{{ siteUrl }}">
+            <img src="{{ siteUrl('img/logo.gif') }}" alt="Festival Bridge">
+        </a>
+    </h1>
+
+    <p id="footer-synopsis">{{ sitewide.synopsis }}</p>
+        
+    <nav id="footer-nav">
+        <p>
+            <a href="tel:01603 877750" class="footer-contactlink">01603 877750</a>
+            <a href="mailto:bridge@nnfestival.org.uk" class="footer-contactlink">bridge@nnfestival.org.uk</a>
+        </p>
+        {% if pages | length %}
+        {% for page in pages %}
+            <a href="{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+        {% endif %}
+    </nav>
+
+</footer>
+
+<p id="footer-copyright">&copy; {{ now | date('Y') }} Festival Bridge, <a href="https://nnfestival.org.uk/" target="_blank">Norfolk & Norwich Festival</a><br>Site by <a href="http://specialdesignstudio.co.uk" target="_blank">Special Design Studio</a></p>
+
+</body>
+</html>
