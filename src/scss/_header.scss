@@ -34,6 +34,8 @@ SITE LOGO
 
     display: none;
 
+    line-height: 1.4em;
+
     @media (min-width: $sm) {
         display: block; width: 32rem;
         padding-top: 2.25rem; padding-left: 2rem;
@@ -56,7 +58,7 @@ SITE LOGO
 
     @media (min-width: $sm) {
         display: block; width: 20rem;
-        font-size: 1.6rem;
+        font-size: 1.6rem; line-height: 1.4em;
         margin-left: auto;
     }
 

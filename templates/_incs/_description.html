@@ -1,0 +1,87 @@
+{% spaceless %}
+
+{% set description = '' %}
+
+{% if item.description_1 is defined and item.description_1 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_1 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_2 is defined and item.description_2 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_2 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_3 is defined and item.description_3 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_3 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_4 is defined and item.description_4 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_4 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_5 is defined and item.description_5 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_5 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_6 is defined and item.description_6 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_6 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_7 is defined and item.description_7 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_7 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_8 is defined and item.description_8 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_8 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_9 is defined and item.description_9 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_9 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_10 is defined and item.description_10 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_10 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_11 is defined and item.description_11 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_11 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_12 is defined and item.description_12 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_12 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_13 is defined and item.description_13 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_13 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_14 is defined and item.description_14 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_14 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_15 is defined and item.description_15 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_15 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_16 is defined and item.description_16 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_16 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_17 is defined and item.description_17 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_17 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_18 is defined and item.description_18 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_18 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_19 is defined and item.description_19 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_19 ~ '</p>') | raw %}
+{% endif %}
+
+{% if item.description_20 is defined and item.description_20 | length %}
+    {% set description = description ~ ('<p>' ~ item.description_20 ~ '</p>') | raw %}
+{% endif %}
+
+{{ description | replace('"', '\\"') | replace('/', '\\/') | raw }}
+
+{% endspaceless %}

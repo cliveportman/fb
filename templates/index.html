@@ -1,3 +1,10 @@
+
+
+{% set polygonLayers = craft.entries.section('layers').type('polygons').all %}
+{% set pointLayers = craft.entries.section('layers').type('points').all %}
+
+
+
 {% extends "_layout" %}
 
 {% block content %}
@@ -8,22 +15,22 @@
     <h1 id="main-heading">Cultural Education Profiles</h1>
 
 <section id="sidebar">
-    {% set polygonLayers = craft.entries.section('layers').type('polygons').all %}
     {% for layer in polygonLayers %}
       <button id="polygonlayer-{{ loop.index }}">{{ layer.title }}</button>
     {% endfor %} 
-    {% set pointLayers = craft.entries.section('layers').type('points').all %}
     {% for layer in pointLayers %}
       <button id="pointlayer-{{ loop.index }}">{{ layer.title }}</button>
     {% endfor %}
-  </section>
+
+    <div id="status"></div>
+</section>
   
   <section id="map-holder">
     <div id="map"></div>
   </section>
 
 </div>
-<div id="status"></div>
+
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs0T27FTl42h2oPJu1sDy3Eq7JHkuU_l0"></script>
 
@@ -120,13 +127,26 @@ function initialize() {
       polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {fillOpacity: .25,});
       //document.getElementById("hoverinfo").innerHTML = event.feature.getProperty('name') + '<br>' + event.feature.getProperty('lsoa');
     });
+
+    // CLICKING ON A POLYGON
     polygonLayers[{{ loop.index0 }}].addListener('click', function(event) {
       polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {
         fillOpacity: 0.75
       });
-      // open up a modal with all the info in it
-      console.log(event.feature.getProperty('lsoa_label_01'));
+      // OPEN UP MODAL
+      //alert(event.feature.getProperty('description'));
+
+    // When the user clicks the button, open the modal 
+
+      document.getElementById("modal-title").innerHTML = event.feature.getProperty('name');
+      document.getElementById("modal-description").innerHTML = event.feature.getProperty('description');
+      document.getElementById("modal-data__cyp").innerHTML = event.feature.getProperty('cyp');
+      document.getElementById("modal-data__artsaward").innerHTML = event.feature.getProperty('artsaward');
+      document.getElementById("modal-data__education").innerHTML = event.feature.getProperty('education');
+      document.getElementById("modal-data__artsmark").innerHTML = event.feature.getProperty('artsmark');
+      document.getElementById("modal").style.display = "block";
     });
+
     polygonLayers[{{ loop.index0 }}].addListener('mouseout', function(event) {
       // polygonLayers[0].overrideStyle(event.feature, {
       //   fillColor: event.feature.getProperty('colour'),
@@ -140,6 +160,7 @@ function initialize() {
     
   function togglePolygonLayers(i) {
     if (polygonLayers[i].getMap() == null) {
+      
       polygonLayers[i].setMap(map);
     } else {
       polygonLayers[i].setMap(null);
@@ -158,5 +179,70 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
   </script>
+
+
+
+
+
+
+<div id="modal">
+<div id="modal-bg">
+
+  <div id="modal-header">
+    <h2 id="modal-title"></h2>
+    <button id="modal-close"><img src="{{ siteUrl('img/close-button-black.svg') }}" alt="Close"></button>
+  </div>
+
+  <div id="modal-content">
+      <div id="modal-description"></div>
+      <div id="modal-data">
+        <div id="modal-data__cyp"></div>
+        <div id="modal-data__artsaward"></div>
+        <div id="modal-data__education"></div>
+        <div id="modal-data__artsmark"></div>
+      </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+// CLOSING THE MODAL (IS OPENED VIA MAP)
+var modal = document.getElementById("modal");
+var closebutton = document.getElementById("modal-close");
+closebutton.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
+
+
+
+
+
+
+
+<div id="loading-overlay">
+
+    <div id="loading-content">
+        <svg width="61px"  height="61px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling" style="background: none;"><circle cx="50" cy="50" fill="none" ng-attr-stroke="#ff0000" ng-attr-stroke-width="10" ng-attr-r="35" ng-attr-stroke-dasharray="" stroke="#ffffff" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138" transform="rotate(29.7684 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>
+        <p>Loading...</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
