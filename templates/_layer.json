@@ -15,23 +15,24 @@
     "features": [
 
 
-
+        
 {% for item in items %}
 {
     "type": "Feature",
     "properties": {
-        "name": "{{ item['Ward Name'] }}",
+        "name": "{{ item['Ward Name'] is defined ? item['Ward Name'] : item['Name'] }}",
         "description": "{% include '_incs/_description' %}",
         "cyp": "{% include '_incs/_cyp' %}",
         "artsaward": "{% include '_incs/_artsaward' %}",
         "education": "{% include '_incs/_education' %}",
         "artsmark": "{% include '_incs/_artsmark' %}",
         "resources": "{% include '_incs/_resources' %}",
-        "colour": "{{ colours[attribute(item,entry.nodeUsedForColourRanking) - 1] }}"
+        "colour": "{{ entry.nodeUsedForColourRanking | length ? colours[attribute(item,entry.nodeUsedForColourRanking) - 1] }}"
     },
     "geometry": {
         "type": "Polygon",
         "coordinates": [
+            {% if '<Polygon>' in item.geometry %}
             {{ item.geometry
                 
                 | replace({'<MultiGeometry>': ''})
@@ -54,12 +55,36 @@
                 | raw
 
             }}
+            {% else %}
+                {{ item.geometry | raw }} {{ item.geometry_cont | raw }} 
+            {% endif %}
         ]
     }
 }{{ not loop.last ? ',' }}
 {% endfor %}
 
-
+{##########
+{% for item in items %}
+{
+    "type": "Feature",
+    "properties": {
+        "name": "{{ item['Name'] }}",
+        "description": "{% include '_incs/_description' %}",
+        "cyp": "{% include '_incs/_cyp' %}",
+        "artsaward": "{% include '_incs/_artsaward' %}",
+        "education": "{% include '_incs/_education' %}",
+        "artsmark": "{% include '_incs/_artsmark' %}",
+        "resources": "{% include '_incs/_resources' %}",
+        "colour": "{{ entry.nodeUsedForColourRanking | length ? colours[attribute(item,entry.nodeUsedForColourRanking) - 1] }}"
+    },
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+        ]
+    }
+}{{ not loop.last ? ',' }}
+{% endfor %}
+########}
 
 
   ]
