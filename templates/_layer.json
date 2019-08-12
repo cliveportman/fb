@@ -20,18 +20,19 @@
 {
     "type": "Feature",
     "properties": {
-        "name": "{{ item['Ward Name'] }}",
+        "name": "{{ item['WD16NM'] is defined ? item['WD16NM'] : item['Ward Name'] }}",
         "description": "{% include '_incs/_description' %}",
         "cyp": "{% include '_incs/_cyp' %}",
         "artsaward": "{% include '_incs/_artsaward' %}",
         "education": "{% include '_incs/_education' %}",
         "artsmark": "{% include '_incs/_artsmark' %}",
         "resources": "{% include '_incs/_resources' %}",
-        "colour": "{{ colours[attribute(item,entry.nodeUsedForColourRanking) - 1] }}"
+        "colour": "{{ entry.nodeUsedForColourRanking | length ? colours[attribute(item,entry.nodeUsedForColourRanking) - 1] }}"
     },
     "geometry": {
         "type": "Polygon",
         "coordinates": [
+            {% if item.geometry is defined %}
             {{ item.geometry
                 
                 | replace({'<MultiGeometry>': ''})
@@ -54,6 +55,9 @@
                 | raw
 
             }}
+            {% else %}
+            {{ item.Geometry }}
+            {% endif %}
         ]
     }
 }{{ not loop.last ? ',' }}
