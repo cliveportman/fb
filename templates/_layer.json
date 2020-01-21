@@ -22,14 +22,14 @@
 {
     "type": "Feature",
     "properties": {
-        "name": "{{ item['WD16NM'] is defined ? item['WD16NM'] : item['Ward Name'] }}",
+        "name": "{{ item['WD16NM'] is defined ? item['WD16NM'] : item['name'] }}",
         "description": "{% include '_incs/_description' %}",
         "cyp": "{% include '_incs/_cyp' %}",
         "artsaward": "{% include '_incs/_artsaward' %}",
         "education": "{% include '_incs/_education' %}",
         "artsmark": "{% include '_incs/_artsmark' %}",
         "resources": "{% include '_incs/_resources' %}",
-        "colour": "{{ entry.nodeUsedForColourRanking | length ? colours[attribute(item,entry.nodeUsedForColourRanking) - 1] }}"
+        "colour": "{{ entry.nodeUsedForColourRanking | length ? colours[attribute(item,entry.nodeUsedForColourRanking) - 1] : '#ff00ff' }}"
     },
     "geometry": {
         "type": "Polygon",
