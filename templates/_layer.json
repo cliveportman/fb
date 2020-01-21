@@ -1,3 +1,5 @@
+{% cache for 5 minutes %}
+
 {% set url = entry.polygons.one.getUrl %}
 {% set items = craft.csvToJson.convert(url) %}
 
@@ -69,5 +71,5 @@
   ]
 }
 {% endif %}
-
+{% endcache %}
 
