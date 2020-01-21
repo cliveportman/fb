@@ -1,9 +1,9 @@
 {% spaceless %}
 
-{% set description = '' %}
-
 {% if item.description_1 is defined and item.description_1 | length %}
-    {% set description = description ~ ('<p>' ~ item.description_1 ~ '</p>') | raw %}
+    {% set description = ('<p>' ~ item.description_1 ~ '</p>') | raw %}
+{% else %}
+    {% set description = false %}
 {% endif %}
 
 {% if item.description_2 is defined and item.description_2 | length %}
@@ -82,6 +82,10 @@
     {% set description = description ~ ('<p>' ~ item.description_20 ~ '</p>') | raw %}
 {% endif %}
 
+
 {{ description | replace('"', '\\"') | replace('/', '\\/') | raw }}
+
+
+
 
 {% endspaceless %}
