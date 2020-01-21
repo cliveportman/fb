@@ -1,14 +1,61 @@
-# Fetch district names using (amend REGD16NM to name of county):
-https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/WD16_REGD16_LAD16_EW_LU/FeatureServer/0/query?where=REGD16NM+like+%27%25Cambridgeshire%25%27&objectIds=&time=&resultType=none&outFields=LAD16NM&returnIdsOnly=false&returnCountOnly=false&returnDistinctValues=true&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=&sqlFormat=none&f=pjson&token=
+#Festival Bridge
 
-# Fetch district geometries using lad16nm:
-https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Local_Authority_Districts_December_2016_Boundaries/MapServer/2/query?where=UPPER(lad16nm)%20like%20%27%25CAMBRIDGE%25%27&outFields=objectid,lad16cd,lad16nm,lad16nmw,bng_e,bng_n,long,lat&outSR=4326&f=json
+## Introduction
+There are two types of map layers
+- Polygon layers
+- Point layers
 
-# Fetch ward names within a district (amend LAD16NM):
-https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/WD16_REGD16_LAD16_EW_LU/FeatureServer/0/query?where=LAD16NM+like+%27%25Broadland%25%27&objectIds=&time=&resultType=none&outFields=*&returnIdsOnly=false&returnCountOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&resultOffset=&resultRecordCount=&sqlFormat=none&f=pjson&token=
+## Polygon layers
+Use a standardised CSV file uploaded into the control panel. Change the Entry Type to "Polygons".
 
-# Fetch ward geometries using wd16nm:
-https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Wards_December_2016_Boundaries/MapServer/2/query?where=UPPER(wd16nm)%20like%20%27%25THORPE%20ST%20ANDREW%20SOUTH%20EAST%25%27&outFields=objectid,wd16cd,wd16nm,wd16nmw,lad16cd,lad16nm,long,lat&outSR=4326&f=json
+###Required columns:
+- name
+- geometry
 
-# Fetch ward geometries using wd16cd:
-https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Wards_December_2016_Boundaries/MapServer/2/query?where=UPPER(wd16cd)%20like%20%27%25E05005758%25%27&outFields=objectid,wd16cd,wd16nm,wd16nmw,lad16cd,lad16nm,long,lat&outSR=4326&f=json
+###Optional columns
+- description_1
+- description_2
+- description_3
+- description_4
+- description_5
+- description_6
+- description_7
+- description_8
+- description_9
+- description_10
+- description_11
+- description_12
+- description_13
+- description_14
+- description_15
+- description_16
+- description_17
+- description_18
+- description_19
+- description_20
+- cyp-n
+- cyp-pp
+cyp-pn
+
+[MORE TO BE ADDED]
+
+Column names are case-sensitive and must be identical to those listed above if the data is to be extracted and displayed. If not correct, the data will either be missing (for optional columns) or prevent the layer from loading in the browser (required columns).
+
+### Colours
+When uploading, there is a table where you can add a row for each column. Below that, you enter the name of the column used to identify which colour to use. This column should contain integers corresponding to the row in the table, with row 1 being the top row.
+
+For example, if your column has values from 1-10, you should make sure there are 10 colours added to the colour table.
+
+## Points layers
+Use a KMZ file uploaded into the control panel. The Entry Type should be "Points", which is the default.
+
+You get hold of the KMZ file by visiting a Google MyMap and exporting to KMZ. Check the following option: "Keep data up to date with network link..."
+
+Note that for the exported KMZ file to be displayed, we require the lat/lng to be exported as well. Google will not do this if you have imported a data set into MyMaps without providing your own lat/lng. The points will display on your MyMap because Google will geocode the addresses when you import, but if this happens they won't be exported.
+
+## Common issues
+If your polygon layers doesn't display, it's likely to be:
+1. Your column names aren't what we're expecting. Check they are exactly the same as above.
+2. Your geometry data has errors in it. If you suspect this, it's a case of uploading again and again with different rows excluded to see where the problem is.
+
+If your points layer doesn't display, it's likely you did not provide your own lat/lng values. You can check this by exporting as a KML file and examining the contents. If you've provided your own, the coordinates will be in there. If not, they won't.
