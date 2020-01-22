@@ -8,11 +8,11 @@ There are two types of map layers
 ## Polygon layers
 Use a standardised CSV file uploaded into the control panel. Change the Entry Type to "Polygons".
 
-###Required columns:
+### Required columns:
 - name
 - geometry
 
-###Optional columns
+### Optional columns
 - description_1
 - description_2
 - description_3
