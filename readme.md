@@ -33,9 +33,9 @@ Use a standardised CSV file uploaded into the control panel. Change the Entry Ty
 - description_18
 - description_19
 - description_20
-- cyp-n
-- cyp-pp
-cyp-pn
+- cyp-n (CYP number)
+- cyp-pp (CYP % of parent)
+- cyp-pn (CYP % to national)
 
 ```More to be added```
 
