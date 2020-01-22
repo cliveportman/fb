@@ -59,3 +59,9 @@ If your polygon layers doesn't display, it's likely to be:
 2. Your geometry data has errors in it. If you suspect this, it's a case of uploading again and again with different rows excluded to see where the problem is.
 
 If your points layer doesn't display, it's likely you did not provide your own lat/lng values. You can check this by exporting as a KML file and examining the contents. If you've provided your own, the coordinates will be in there. If not, they won't.
+
+## Specific examples
+### Wards
+This is a polygon layer, so requires name, geometry, a colour column and any of the optional columns. Not all data is available for the Wards, so expect just descriptions and the three CYP columns only.
+
+```LATEST SCV DISPLAYS FINE BUT IS MISSING COLOUR VALUES, SO WAITING FOR AN UPDATED VERSION]```
