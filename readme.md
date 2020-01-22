@@ -37,7 +37,7 @@ Use a standardised CSV file uploaded into the control panel. Change the Entry Ty
 - cyp-pp
 cyp-pn
 
-[MORE TO BE ADDED]
+```More to be added```
 
 Column names are case-sensitive and must be identical to those listed above if the data is to be extracted and displayed. If not correct, the data will either be missing (for optional columns) or prevent the layer from loading in the browser (required columns).
 
@@ -64,4 +64,4 @@ If your points layer doesn't display, it's likely you did not provide your own l
 ### Wards
 This is a polygon layer, so requires name, geometry, a colour column and any of the optional columns. Not all data is available for the Wards, so expect just descriptions and the three CYP columns only.
 
-```LATEST SCV DISPLAYS FINE BUT IS MISSING COLOUR VALUES, SO WAITING FOR AN UPDATED VERSION]```
+```Latest CSV is missing colour values so waiting for updated version.```
