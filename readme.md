@@ -9,42 +9,56 @@ There are two types of map layers
 Use a standardised CSV file uploaded into the control panel. Change the Entry Type to "Polygons".
 
 ### Required columns:
-- name
-- geometry
+```name```
+
+```geometry```
 
 ### Optional columns
-- description_1
-- description_2
-- description_3
-- description_4
-- description_5
-- description_6
-- description_7
-- description_8
-- description_9
-- description_10
-- description_11
-- description_12
-- description_13
-- description_14
-- description_15
-- description_16
-- description_17
-- description_18
-- description_19
-- description_20
-- cyp-n (CYP number)
-- cyp-pp (CYP % of parent)
-- cyp-pn (CYP % to national)
-- cyp-v (Varience of CYP % to national)
-- aa-n (AA awards in 18/19)
-- aa-pp (AA % of parent)
-- aa-pc (AA per capita of parent)
-- es-n (ES number)
-- es-pp (ES % of parent)
-- am-n (AM number)
-- am-pp (AM % of parent's Artsmarks)
-- am-ppes (AM % of parent's ES)
+```description_1```
+```description_2```
+```description_3```
+```description_4```
+```description_5```
+```description_6```
+```description_7```
+```description_8```
+```description_9```
+```description_10```
+```description_11```
+```description_12```
+```description_13```
+```description_14```
+```description_15```
+```description_16```
+```description_17```
+```description_18```
+```description_19```
+```description_20```
+
+```cyp-n``` (CYP number)
+
+```cyp-pp``` (CYP % of parent)
+
+```cyp-pn``` (CYP % to national)
+
+```cyp-v``` (Varience of CYP % to national)
+
+```aa-n``` (AA awards in 18/19)
+
+```aa-pp``` (AA % of parent)
+
+```aa-pc``` (AA per capita of parent)
+
+```es-n``` (ES number)
+
+```es-pp``` (ES % of parent)
+
+```am-n``` (AM number)
+
+```am-pp``` (AM % of parent's Artsmarks)
+
+```am-ppes``` (AM % of parent's ES)
+
 
 Column names are case-sensitive and must be identical to those listed above if the data is to be extracted and displayed. If not correct, the data will either be missing (for optional columns) or prevent the layer from loading in the browser (required columns).
 
