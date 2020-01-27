@@ -83,6 +83,18 @@ If your points layer doesn't display, it's likely you did not provide your own l
 
 ## Specific examples
 ### Wards
-This is a polygon layer, so requires name, geometry, a colour column and any of the optional columns. Not all data is available for the Wards, so expect just descriptions and the three CYP columns only.
+This is a polygon layer, so requires name and geometry. Not all data is available for the Wards, so expect just descriptions and the three CYP columns only.
 
-> Latest CSV is missing colour values so waiting for updated version.
+> It looks like there are no individual colour values for the wards, so just choose a colour
+
+### Districts
+Polygon layer, but provided geometries in latest CSV are truncated within cell.
+> Waiting for Sava to send updated CSV without truncations
+
+### Counties
+This is a polygon layer, so requires name and geometry. I can't find any other data for the counties.
+Working.
+> It looks like there are no individual colour values for the wards, so just choose a colour
+
+### LSOAs
+Polygon layer, geometries need converting to json arrays using template we've built. Need to better understand what this is showing, though - is Sava under the impression the map is used for navigation here? Because that's no longer the case.
