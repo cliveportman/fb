@@ -106,5 +106,5 @@ Polygon layer, with colours and decile_rank to manage them. No numerical data.
 
 > Working
 
-## To add
+## Nice features to add
 - Look to add hover labels to polygons
