@@ -29,10 +29,10 @@
             <a href="tel:01603 877750" class="header-contactlink">01603 877750</a>
             <a href="mailto:bridge@nnfestival.org.uk" class="header-contactlink">bridge@nnfestival.org.uk</a>
         </p>
-        {% if craft.app.request.segments | last != '' %}<a href="{{ siteUrl }}">Cultural Education Profiles</a>{% endif %}}
+        {% if craft.app.request.segments | last != '' %}<a href="{{ siteUrl }}">Back to Cultural Education Profiles</a>{% endif %}
         {% if pages | length %}
         {% for page in pages %}
-            {% if craft.app.request.segments | last != page.slug %}<a href="{{ page.url }}">{{ page.title }}</a>{% endif %}}
+            {% if craft.app.request.segments | last != page.slug %}<a href="{{ page.url }}">{{ page.title }}</a>{% endif %}
         {% endfor %}
         {% endif %}
     </nav>
