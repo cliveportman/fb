@@ -15,11 +15,11 @@
     <h1 id="main-heading">Cultural Education Profiles</h1>
 
 <section id="sidebar">
+    {% for layer in pointLayers %}
+    <button id="pointlayer-{{ loop.index }}">{{ layer.title }}</button>
+    {% endfor %}
     {% for layer in polygonLayers %}
       <button id="polygonlayer-{{ loop.index }}">{{ layer.title }}</button>
-    {% endfor %} 
-    {% for layer in pointLayers %}
-      <button id="pointlayer-{{ loop.index }}">{{ layer.title }}</button>
     {% endfor %}
 
     <div id="status"></div>
