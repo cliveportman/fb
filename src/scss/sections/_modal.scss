@@ -38,7 +38,12 @@
     #modal-description {
         padding: 0 1rem 0 0;
         @media (min-width: $md) {
-            padding: 0 10%;
+            margin: 0 10%;
+            padding: 20px;
+            border-top: 1px solid #ccc;
+            overflow-y: auto;
+
+            height: 300px;
         }
 
         p {

@@ -1,1 +1,22 @@
-<h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-education.gif\" alt=\"\">Education setting<\/h3><ul><li>1199 education establishments<\/li><li>5% of the country<\/li><\/ul>
+    {% spaceless %}
+    <h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-education.gif\" alt=\"\">Education setting<\/h3>
+
+        <ul>
+            {% if item.es_n is not defined
+            and item.es_pp is not defined
+            %}
+            <li>No data available<\/li>
+                {% else %}
+
+                {% if item.es_n is defined and item.es_n | length %}
+            <li>{{ item.es_n }} education establishments<\/li>
+                {% endif %}
+
+                {% if item.es_pp is defined and item.es_pp | length %}
+            <li>{{ item.es_pp }}% of parent's education establishments<\/li>
+                {% endif %}
+
+                {% endif %}
+                <\/ul>
+
+                {% endspaceless %}

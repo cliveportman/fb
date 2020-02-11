@@ -1,1 +1,27 @@
-<h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-artsmark.gif\" alt=\"\"><\/h3><ul><li>228 Artsmark schools<\/li><li>6% of schools in east of england<\/li><li>19% of the country's education establishments<\/li><\/ul>
+    {% spaceless %}
+    <h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-artsmark.gif\" alt=\"Artsmark\"><\/h3>
+
+        <ul>
+            {% if item.am_n is not defined
+            and item.am_pp is not defined
+            and item.am_ppes is not defined
+            %}
+            <li>No data available<\/li>
+                {% else %}
+
+                {% if item.am_n is defined and item.am_n | length %}
+            <li>{{ item.am_n }} Artsmark schools<\/li>
+                {% endif %}
+
+                {% if item.aa_pp is defined and item.aa_pp | length %}
+            <li>{{ item.aa_pp }}% of parent's Artsmarks<\/li>
+                {% endif %}
+
+                {% if item.am_ppes is defined and item.am_ppes | length %}
+            <li>{{ item.am_ppes }} per capita of parent<\/li>
+                {% endif %}
+
+                {% endif %}
+                <\/ul>
+
+                {% endspaceless %}

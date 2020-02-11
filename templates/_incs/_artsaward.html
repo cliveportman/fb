@@ -1,1 +1,27 @@
-<h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-arts-award.gif\" alt=\"\"><\/h3><ul><li>5368 Awards in 2016\/17<\/li><li>7% of Awards in the country<\/li><\/ul>
+{% spaceless %}
+<h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-arts-award.gif\" alt=\"Arts Award\"><\/h3>
+
+<ul>
+{% if item.aa_n is not defined
+    and item.aa_pp is not defined
+    and item.aa_pc is not defined
+%}
+<li>No data available<\/li>
+{% else %}
+
+{% if item.aa_n is defined and item.aa_n | length %}
+<li>{{ item.aa_n }}<\/li>
+{% endif %}
+
+{% if item.aa_pp is defined and item.aa_pp | length %}
+<li>{{ item.aa_pp }}% of parent<\/li>
+{% endif %}
+
+{% if item.aa_pc is defined and item.aa_pc | length %}
+<li>{{ item.aa_pc }} per capita of parent<\/li>
+{% endif %}
+
+{% endif %}
+<\/ul>
+
+{% endspaceless %}

@@ -35,29 +35,29 @@ Use a standardised CSV file uploaded into the control panel. Change the Entry Ty
 ```description_19```
 ```description_20```
 
-```cyp-n``` (CYP number)
+```cyp_n``` (CYP number)
 
-```cyp-pp``` (CYP % of parent)
+```cyp_pp``` (CYP % of parent)
 
-```cyp-pn``` (CYP % to national)
+```cyp_pn``` (CYP % to national)
 
-```cyp-v``` (Varience of CYP % to national)
+```cyp_v``` (Variance of CYP % to national)
 
-```aa-n``` (AA awards in 18/19)
+```aa_n``` (AA awards in 18/19)
 
-```aa-pp``` (AA % of parent)
+```aa_pp``` (AA % of parent)
 
-```aa-pc``` (AA per capita of parent)
+```aa_pc``` (AA per capita of parent)
 
-```es-n``` (ES number)
+```es_n``` (ES number)
 
-```es-pp``` (ES % of parent)
+```es_pp``` (ES % of parent)
 
-```am-n``` (AM number)
+```am_n``` (AM number)
 
-```am-pp``` (AM % of parent's Artsmarks)
+```am_pp``` (AM % of parent's Artsmarks)
 
-```am-ppes``` (AM % of parent's ES)
+```am_ppes``` (AM % of parent's ES)
 
 
 Column names are case-sensitive and must be identical to those listed above if the data is to be extracted and displayed. If not correct, the data will either be missing (for optional columns) or prevent the layer from loading in the browser (required columns).

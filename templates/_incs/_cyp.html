@@ -1,21 +1,33 @@
 {% spaceless %}
 
+<h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-cyp.gif\" alt=\"\">Number Of Children and Young People (CYP)<\/h3>
 
-    <h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-cyp.gif\" alt=\"\">Number Of Children and Young People (CYP)<\/h3>
+<ul>
+{% if item.cyp_n is not defined
+    and item.cyp_pp is not defined
+    and item.cyp_pn is not defined
+    and item.cyp_v is not defined
+%}
+<li>No data available<\/li>
+{% else %}
 
-    <ul>
-        {% if item.cyp_n is not defined
-            and item.cyp_pp is not defined
-        %}
-            <li>No data available<\/li>
-        {% else %}
-                {% if item.cyp_n is defined and item.cyp_n | length %}
-                    <li>{{ item.cyp_n }}<\/li>
-                    {% endif %}
-                {% if item.cyp_pp is defined and item.cyp_pp | length %}
-                    <li>{{ item.cyp_pp }}% of parent<\/li>
-                {% endif %}
-        {% endif %}
-    <\/ul>
+    {% if item.cyp_n is defined and item.cyp_n | length %}
+    <li>{{ item.cyp_n }}<\/li>
+    {% endif %}
+
+    {% if item.cyp_pp is defined and item.cyp_pp | length %}
+    <li>{{ item.cyp_pp }}% of parent<\/li>
+    {% endif %}
+
+    {% if item.cyp_pn is defined and item.cyp_pn | length %}
+    <li>{{ item.cyp_pn }}% of national<\/li>
+    {% endif %}
+
+    {% if item.cyp_v is defined and item.cyp_v | length %}
+    <li>{{ item.cyp_v }}% variance of national<\/li>
+    {% endif %}
+
+{% endif %}
+<\/ul>
 
 {% endspaceless %}
