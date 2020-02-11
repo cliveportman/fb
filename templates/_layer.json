@@ -56,7 +56,7 @@
                     
                 | raw
 
-            }}{{ item.geometry2 | length ? item.geometry2 }}{{ item.geometry3 | length ? item.geometry3 }}
+            }}{{ item.geometry2 is defined ? item.geometry2 }}{{ item.geometry3 is defined ? item.geometry3 }}
             {% else %}
             {{ item.Geometry }}
             {% endif %}
