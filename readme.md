@@ -12,6 +12,7 @@ Use a standardised CSV file uploaded into the control panel. Change the Entry Ty
 ```name```
 
 ```geometry```
+```geometry2```
 
 ### Optional columns
 ```description_1```
@@ -63,9 +64,11 @@ Use a standardised CSV file uploaded into the control panel. Change the Entry Ty
 Column names are case-sensitive and must be identical to those listed above if the data is to be extracted and displayed. If not correct, the data will either be missing (for optional columns) or prevent the layer from loading in the browser (required columns).
 
 ### Colours
-When uploading, there is a table where you can add a row for each column. Below that, you enter the name of the column used to identify which colour to use. This column should contain integers corresponding to the row in the table, with row 1 being the top row.
+When uploading, there is a table where you can add a row for each column. Below that, you enter the name of the column used to identify which colour to use. This column should contain integers corresponding to the row in the table, with row 1 being the top row. For example, if your column has values from 1-10, you should make sure there are 10 colours added to the colour table.
 
-For example, if your column has values from 1-10, you should make sure there are 10 colours added to the colour table.
+You can still add colours if you don't have a colour column - just add the hex codes to the table and they'll be assigned randomly.
+
+Failing that, there is an option for a default colour fo all the polygons.
 
 ## Points layers
 Use a KMZ file uploaded into the control panel. The Entry Type should be "Points", which is the default.
@@ -74,10 +77,12 @@ You get hold of the KMZ file by visiting a Google MyMap and exporting to KMZ. Ch
 
 Note that for the exported KMZ file to be displayed, we require the lat/lng to be exported as well. Google will not do this if you have imported a data set into MyMaps without providing your own lat/lng. The points will display on your MyMap because Google will geocode the addresses when you import, but if this happens they won't be exported.
 
+> Working
+
 ## Common issues
 If your polygon layers doesn't display, it's likely to be:
 1. Your column names aren't what we're expecting. Check they are exactly the same as above.
-2. Your geometry data has errors in it. If you suspect this, it's a case of uploading again and again with different rows excluded to see where the problem is.
+2. Your geometry data has errors in it. If you suspect this, it's a case of uploading again and again with different rows excluded to see where the problem is. If the geometry is in JSON format, check it with an online JSON validator
 
 If your points layer doesn't display, it's likely you did not provide your own lat/lng values. You can check this by exporting as a KML file and examining the contents. If you've provided your own, the coordinates will be in there. If not, they won't.
 
@@ -88,19 +93,18 @@ This is a polygon layer, so requires name and geometry. Not all data is availabl
 > Working
 
 ### Districts
-Polygon layer, but provided geometries in latest CSV are truncated within cell.
-> Waiting for Sava to send updated CSV without truncations. She's done so once but it looks like a third column is needed for some!
+Polygon layer. Has limited numerical data.
+> Working
 
 ### Counties
-This is a polygon layer, so requires name and geometry. I can't find any other data for the counties.
+This is a polygon layer, so requires name and geometry. No numerical data.
 
 > Working
 
 ### LSOAs
-Polygon layer, with colours and decile_rank to manage them.
+Polygon layer, with colours and decile_rank to manage them. No numerical data.
 
 > Working
 
 ## To add
 - Look to add hover labels to polygons
-- Add information on CYP etc
