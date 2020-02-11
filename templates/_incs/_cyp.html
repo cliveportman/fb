@@ -1,1 +1,23 @@
-<h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-cyp.gif\" alt=\"\">Number Of Children and Young People (CYP)<\/h3><ul><li>{{ item.cyp-n }}<\/li><li>{{ item.cyp-pp }}% of parent<\/li><\/ul>
+{% spaceless %}
+
+
+    <h3>
+        <img src=\"https:\/\/fb.theportman.co\/img\/icon-cyp.gif\" alt=\"\">Number Of Children and Young People (CYP)
+    <\/h3>
+        
+    <ul>
+        {% if item.cypN is not defined
+            and item.cypPP is not defined
+        %}
+            <li>No data available<\/li>
+        {% else %}
+                {% if item.cypN is defined amd item.cypN | length %}
+                    <li>{{ item.cypN }}<\/li>
+                    {% endif %}
+                {% if item.cypPP is defined amd item.cypPP | length %}
+                    <li>{{ item.cypPP }}% of parent<\/li>
+                {% endif %}
+        {% endif %}
+    <\/ul>
+
+{% endspaceless %
