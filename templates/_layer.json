@@ -29,7 +29,7 @@
         "education": "{% include '_incs/_education' %}",
         "artsmark": "{% include '_incs/_artsmark' %}",
         "resources": "{% include '_incs/_resources' %}",
-        "colour": "{{ entry.nodeUsedForColourRanking | length ? colours[attribute(item,entry.nodeUsedForColourRanking) - 1] : entry.defaultColour }}"
+        "colour": "{% include '_incs/_colour' %}"
     },
     "geometry": {
         "type": "Polygon",

@@ -1,0 +1,8 @@
+{% spaceless %}
+{% if entry.nodeUsedForColourRanking | length %}
+    {{ colours[attribute(item,entry.nodeUsedForColourRanking) - 1] }}
+{% elseif colours | length %}
+    {{ colours[random(colours | length - 1)] }}}
+{% else %}
+    {{ entry.defaultColour }}
+{% endif %}}
