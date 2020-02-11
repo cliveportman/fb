@@ -53,7 +53,7 @@
                     
                 | raw
 
-            }}
+            }}{{ item.geometry2 | length ? item.geometry2 }}{{ item.geometry3 | length ? item.geometry3 }}
         ]
     }
 }{{ not loop.last ? ',' }}
