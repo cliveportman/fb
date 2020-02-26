@@ -22,7 +22,7 @@
     <button id="pointlayer-{{ loop.index }}">{{ layer.title }}</button>
     {% endfor %}
 
-    {% if sitewide.sidebarText | length %}<p>{{ sitewide.sidebarText }}</p>{% endif %}
+    {% if sitewide.sidebarText | length %}<p style="margin-top: 1rem; font-size: 12px; line-height: 1.2em;">{{ sitewide.sidebarText }}</p>{% endif %}
 
     <div id="status"></div>
 </section>
