@@ -56,10 +56,10 @@
             <a href="tel:01603 877750" class="footer-contactlink">01603 877750</a>
             <a href="mailto:bridge@nnfestival.org.uk" class="footer-contactlink">bridge@nnfestival.org.uk</a>
         </p>
-        <a href="{{ siteUrl }}">Cultural Education Profiles</a>
+        {% if craft.app.request.segments | last != '' %}<a href="{{ siteUrl }}">Back to Cultural Education Profiles</a>{% endif %}
         {% if pages | length %}
         {% for page in pages %}
-            <a href="{{ page.url }}">{{ page.title }}</a>
+        {% if craft.app.request.segments | last != page.slug %}<a href="{{ page.url }}">{{ page.title }}</a>{% endif %}
         {% endfor %}
         {% endif %}
     </nav>
