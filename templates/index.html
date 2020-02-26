@@ -50,6 +50,78 @@ function initialize() {
   };
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+
+
+
+    var polygonLayers = [];
+
+    {% for layer in polygonLayers %}
+
+    polygonLayers[{{ loop.index0 }}] = new google.maps.Data();
+    polygonLayers[{{ loop.index0 }}].loadGeoJson('{{ layer.url }}');
+    polygonLayers[{{ loop.index0 }}].setStyle(function(feature) {
+        var colour = feature.getProperty('colour');
+        return {
+            fillColor: colour,
+            fillOpacity: 0.5,
+            strokeWeight: 1,
+            strokeColor: '#cccccc'
+        };
+    });
+    polygonLayers[{{ loop.index0 }}].addListener('mouseover', function(event) {
+        polygonLayers[{{ loop.index0 }}].revertStyle();
+        polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {fillOpacity: .25,});
+        //document.getElementById("hoverinfo").innerHTML = event.feature.getProperty('name') + '<br>' + event.feature.getProperty('lsoa');
+    });
+
+    // CLICKING ON A POLYGON
+    polygonLayers[{{ loop.index0 }}].addListener('click', function(event) {
+        polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {
+            fillOpacity: 0.75
+        });
+        // OPEN UP MODAL
+        //alert(event.feature.getProperty('description'));
+
+        // When the user clicks the button, open the modal
+
+        document.getElementById("modal-title").innerHTML = event.feature.getProperty('name');
+        document.getElementById("modal-description").innerHTML = event.feature.getProperty('description');
+        document.getElementById("modal-data__cyp").innerHTML = event.feature.getProperty('cyp');
+        document.getElementById("modal-data__artsaward").innerHTML = event.feature.getProperty('artsaward');
+        document.getElementById("modal-data__education").innerHTML = event.feature.getProperty('education');
+        document.getElementById("modal-data__artsmark").innerHTML = event.feature.getProperty('artsmark');
+        document.getElementById("modal").style.display = "block";
+    });
+
+    polygonLayers[{{ loop.index0 }}].addListener('mouseout', function(event) {
+        // polygonLayers[0].overrideStyle(event.feature, {
+        //   fillColor: event.feature.getProperty('colour'),
+        //   fillOpacity: 0.5,
+        // });
+        polygonLayers[{{ loop.index0 }}].revertStyle();
+        //document.getElementById("hoverinfo").innerHTML = '';
+    });
+
+    {% endfor %}
+
+    function togglePolygonLayers(i) {
+        if (polygonLayers[i].getMap() == null) {
+
+            polygonLayers[i].setMap(map);
+        } else {
+            polygonLayers[i].setMap(null);
+        }
+    }
+
+    {% for layer in polygonLayers %}
+    // add the event listener to the button
+    google.maps.event.addDomListener(document.getElementById('polygonlayer-{{ loop.index }}'), 'click', function(evt) {
+        togglePolygonLayers({{ loop.index0 }});
+        toggleButton(this);
+    });
+    {% endfor %}
+
+
   // layers to toggle 
   var pointLayers = [];
 
@@ -107,73 +179,6 @@ function initialize() {
 
   {% endfor %}
 
-  var polygonLayers = [];
-
-  {% for layer in polygonLayers %}
-
-    polygonLayers[{{ loop.index0 }}] = new google.maps.Data();
-    polygonLayers[{{ loop.index0 }}].loadGeoJson('{{ layer.url }}');
-    polygonLayers[{{ loop.index0 }}].setStyle(function(feature) {
-      var colour = feature.getProperty('colour');
-      return {
-        fillColor: colour,
-        fillOpacity: 0.5,
-        strokeWeight: 1,
-        strokeColor: '#cccccc'
-      };
-    });
-    polygonLayers[{{ loop.index0 }}].addListener('mouseover', function(event) {
-      polygonLayers[{{ loop.index0 }}].revertStyle();
-      polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {fillOpacity: .25,});
-      //document.getElementById("hoverinfo").innerHTML = event.feature.getProperty('name') + '<br>' + event.feature.getProperty('lsoa');
-    });
-
-    // CLICKING ON A POLYGON
-    polygonLayers[{{ loop.index0 }}].addListener('click', function(event) {
-      polygonLayers[{{ loop.index0 }}].overrideStyle(event.feature, {
-        fillOpacity: 0.75
-      });
-      // OPEN UP MODAL
-      //alert(event.feature.getProperty('description'));
-
-    // When the user clicks the button, open the modal 
-
-      document.getElementById("modal-title").innerHTML = event.feature.getProperty('name');
-      document.getElementById("modal-description").innerHTML = event.feature.getProperty('description');
-      document.getElementById("modal-data__cyp").innerHTML = event.feature.getProperty('cyp');
-      document.getElementById("modal-data__artsaward").innerHTML = event.feature.getProperty('artsaward');
-      document.getElementById("modal-data__education").innerHTML = event.feature.getProperty('education');
-      document.getElementById("modal-data__artsmark").innerHTML = event.feature.getProperty('artsmark');
-      document.getElementById("modal").style.display = "block";
-    });
-
-    polygonLayers[{{ loop.index0 }}].addListener('mouseout', function(event) {
-      // polygonLayers[0].overrideStyle(event.feature, {
-      //   fillColor: event.feature.getProperty('colour'),
-      //   fillOpacity: 0.5,
-      // });
-      polygonLayers[{{ loop.index0 }}].revertStyle();
-      //document.getElementById("hoverinfo").innerHTML = '';
-    });
-  
-  {% endfor %}
-    
-  function togglePolygonLayers(i) {
-    if (polygonLayers[i].getMap() == null) {
-      
-      polygonLayers[i].setMap(map);
-    } else {
-      polygonLayers[i].setMap(null);
-    }
-  }
-
-  {% for layer in polygonLayers %}
-    // add the event listener to the button
-    google.maps.event.addDomListener(document.getElementById('polygonlayer-{{ loop.index }}'), 'click', function(evt) {
-      togglePolygonLayers({{ loop.index0 }});
-      toggleButton(this);
-    });
-  {% endfor %}
 
 } // end the initialize function
 
