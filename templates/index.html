@@ -128,7 +128,7 @@ function initialize() {
   {% for layer in pointLayers %}
   pointLayers[{{ loop.index0 }}] = new google.maps.KmlLayer('{{ layer.points.one.url }}', {
       preserveViewport: true,
-        zIndex: 9999
+        zIndex: 9
     });
   {% endfor %}
 
@@ -136,7 +136,7 @@ function initialize() {
   loadKml = function(opts, map) {
     var layer = new google.maps.KmlLayer();
     opts.preserveViewport = true;
-    opts.zIndex = 9999;
+    opts.zIndex = 9;
     if (map) {
       opts.map = map;
     }
