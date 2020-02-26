@@ -136,6 +136,7 @@ function initialize() {
   loadKml = function(opts, map) {
     var layer = new google.maps.KmlLayer();
     opts.preserveViewport = true;
+    opts.zIndex = 9999;
     if (map) {
       opts.map = map;
     }
