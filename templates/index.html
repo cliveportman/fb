@@ -22,6 +22,8 @@
     <button id="pointlayer-{{ loop.index }}">{{ layer.title }}</button>
     {% endfor %}
 
+    {% if sitewide.sidebarText | length %}<p>{{ sitewide.sidebarText }}</p>{% endif %}
+
     <div id="status"></div>
 </section>
   
