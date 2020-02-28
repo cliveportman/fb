@@ -3,12 +3,12 @@
 <h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-cyp.gif\" alt=\"\">Number Of Children and Young People (CYP)<\/h3>
 
 <ul>
-{% if item.cyp_n is not defined
-    and item.cyp_pp is not defined
-    and item.cyp_pn is not defined
-    and item.cyp_v is not defined
+{% if item.cyp_n is not defined and not item.cyp_n | length
+    and item.cyp_pp is not defined and not item.cyp_pp | length
+    and item.cyp_pn is not defined and not item.cyp_pn | length
+    and item.cyp_v is not defined and not item.cyp_v | length
 %}
-{#<li>No data available<\/li>#}
+<li>No data available<\/li>
 {% else %}
 
     {% if item.cyp_n is defined and item.cyp_n | length %}

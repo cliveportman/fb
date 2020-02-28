@@ -60,6 +60,8 @@ Use a standardised CSV file uploaded into the control panel. Change the Entry Ty
 
 ```am_ppes``` (AM % of parent's ES)
 
+If you want to add links (hrefs), they need to be inserted as HTML within the description columns. They shoulc look like this:
+```<a href="https://www.site.com">Click here</a>```
 
 Column names are case-sensitive and must be identical to those listed above if the data is to be extracted and displayed. If not correct, the data will either be missing (for optional columns) or prevent the layer from loading in the browser (required columns).
 

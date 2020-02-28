@@ -2,9 +2,9 @@
 <h3><img src=\"https:\/\/fb.theportman.co\/img\/icon-arts-award.gif\" alt=\"Arts Award\"><\/h3>
 
 <ul>
-{% if item.aa_n is not defined
-    and item.aa_pp is not defined
-    and item.aa_pc is not defined
+{% if item.aa_n is not defined and not item.aa_n | length
+    and item.aa_pp is not defined and not item.aa_pp | length
+    and item.aa_pc is not defined and not item.aa_pc | length
 %}
 <li>No data available<\/li>
 {% else %}

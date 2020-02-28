@@ -33,24 +33,24 @@
         "type": "Polygon",
         "coordinates": [
             {{ item.geometry
-                
+
                 | replace({'<MultiGeometry>': ''})
-                | replace({'</MultiGeometry>': ''})                
-                
+                | replace({'</MultiGeometry>': ''})
+
                 | replace({'</Polygon><Polygon>': '],['})
                 | replace({'<Polygon>': '['})
                 | replace({'</Polygon>': ']'})
 
                 | replace({'<outerBoundaryIs><LinearRing><coordinates>': '['})
                 | replace({'</coordinates></LinearRing></outerBoundaryIs>': ''})
-                
+
                 | replace({',0.0 ': '],['})
                 | replace({',0.0': ']'})
 
-                
+
                 | replace({'<innerBoundaryIs><LinearRing><coordinates>': '],[['})
                 | replace({'</coordinates></LinearRing></innerBoundaryIs>': ''})
-                    
+
                 | raw
 
             }}{{ item.geometry2 | length ? item.geometry2 }}{{ item.geometry3 | length ? item.geometry3 }}
